@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<VillaDbContext>(DbContextOptionsBuilder db =>
+builder.Services.AddDbContext<VillaDbContext>(db =>
 {
     db.UseSqlServer(builder.Configuration.GetConnectionString(name: "Default"));
 });

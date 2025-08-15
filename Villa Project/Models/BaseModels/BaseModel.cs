@@ -1,4 +1,4 @@
-﻿namespace Villa_Project.Models.BaseModel
+﻿namespace Villa_Project.Models.BaseModels
 {
     public class BaseModel
     {

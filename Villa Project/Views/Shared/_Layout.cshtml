@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Villa Agency TemplateMo - Contact Page</title>
+    <title>Villa Agency - Real Estate HTML5 Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/assests/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="~/assets/css/templatemo-villa-agency.css">
     <link rel="stylesheet" href="~/assets/css/owl.css">
     <link rel="stylesheet" href="~/assets/css/animate.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <!--
 
     TemplateMo 591 villa agency
@@ -50,7 +50,7 @@
                     <ul class="info">
                         <li><i class="fa fa-envelope"></i> info@company.com</li>
                         <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
-                        <li><i class="fa fa-map"></i>  </li>
+
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4">
@@ -78,9 +78,9 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/" class="@(Context.Request.Path == "/home" ? "active" : "")">Home</a></li>
-                            <li><a href="/property" class="@(Context.Request.Path == "/" ? "property" : "")">Properties</a></li>
-                            <li><a href="/contact" class="@(Context.Request.Path == "/" ? "contact" : "")">Contact Us</a></li>
+                            <li><a href="/home" class="@(Context.Request.Path == "/home" ? "active" : "")">Home</a></li>
+                            <li><a href="/property" class="@(Context.Request.Path == "/property" ? "active" : "")">Properties</a></li>
+                            <li><a href="/contact" class="@(Context.Request.Path == "/contact" ? "active" : "")">Contact Us</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
                         </ul>
                         <a class='menu-trigger'>
@@ -93,10 +93,12 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-@RenderBody()
+    @RenderBody()
+
+
     <footer>
         <div class="container">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <p>
                     Copyright © 2048 Villa Agency Co., Ltd. All rights reserved.
 
@@ -117,4 +119,3 @@
 
 </body>
 </html>
-      
