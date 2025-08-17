@@ -1,11 +1,17 @@
-﻿<div class="main-banner">
+﻿@model List<Slider>
+
+<div class="main-banner">
     <div class="owl-carousel owl-banner">
-        <div class="item item-1">
-            <div class="header-text">
-                <span class="category">Toronto, <em>Canada</em></span>
-                <h2>Hurry!<br>Get the Best Villa for you</h2>
+     @foreach(var slider in Model)
+        {
+            <div class="item item-1" style="background-image: url('@Url.Context("~/assets/images/"+slider.Image)');")">
+                <div class="header-text">
+                    <span class="category">@slider.CityCountry, </span>
+                    <h2>Hurry!<br>@slider.Title</h2>
+                </div>
             </div>
-        </div>
+        }
+)
         <div class="item item-2">
             <div class="header-text">
                 <span class="category">Melbourne, <em>Australia</em></span>

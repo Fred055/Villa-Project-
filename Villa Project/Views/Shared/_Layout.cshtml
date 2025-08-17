@@ -78,7 +78,7 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/home" class="@(Context.Request.Path == "/home" ? "active" : "")">Home</a></li>
+                            <li><a asp-controller="home" asp-action="index" class="@(Context.Request.Path == "/home" ? "active" : "")">Home</a></li>
                             <li><a href="/property" class="@(Context.Request.Path == "/property" ? "active" : "")">Properties</a></li>
                             <li><a href="/contact" class="@(Context.Request.Path == "/contact" ? "active" : "")">Contact Us</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
