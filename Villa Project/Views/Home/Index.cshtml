@@ -2,28 +2,15 @@
 
 <div class="main-banner">
     <div class="owl-carousel owl-banner">
-     @foreach(var slider in Model)
+        @foreach (var slider in Model)
         {
-            <div class="item item-1" style="background-image: url('@Url.Context("~/assets/images/"+slider.Image)');")">
+            <div class="item item-1" style="background-image: url('@Url.Content("~/assets/images/" + slider.Image)');">
                 <div class="header-text">
-                    <span class="category">@slider.CityCountry, </span>
+                    <span class="category">@slider.CityCountry</span>
                     <h2>Hurry!<br>@slider.Title</h2>
                 </div>
             </div>
         }
-)
-        <div class="item item-2">
-            <div class="header-text">
-                <span class="category">Melbourne, <em>Australia</em></span>
-                <h2>Be Quick!<br>Get the best villa in town</h2>
-            </div>
-        </div>
-        <div class="item item-3">
-            <div class="header-text">
-                <span class="category">Miami, <em>South Florida</em></span>
-                <h2>Act Now!<br>Get the highest level penthouse</h2>
-            </div>
-        </div>
     </div>
 </div>
 

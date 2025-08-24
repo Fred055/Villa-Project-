@@ -1,0 +1,48 @@
+﻿@model List<Villa>
+
+@{
+    var counter = 1;
+}
+<div>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Address</th>
+                <th scope="col">Delete</th>
+                the
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var villa in Model)
+            {
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@villa.Id</td>
+                    <td>@villa.Adress</td>
+                   <td>@villa.Category.CategoryName</td>
+                   
+
+
+                    <td><a asp-contorller="villa" asp-action="delete" asp-route-id="@villa.Id" class="btn btn-danger">Delete</a></td>
+                    <td><a asp-contorller="villa" asp-action="edit" asp-route-id="@villa.Id" class="btn btn-primary">Edit</a>
+                </tr>
+                counter++;
+            }
+            )
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <button>
+        <a asp-controller="villa" asp-action="create" class="btn btn-success" style="float:right">Categroy Create</a>
+    </button>
+</div>

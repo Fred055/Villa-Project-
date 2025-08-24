@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Villa_Project.Context;
 using Villa_Project.Models;
 
 namespace Villa_Project.Controllers
@@ -12,16 +14,16 @@ namespace Villa_Project.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<Slider> sliders = await _context.Sliders.Where(s => !s.IsDeleted).ToListAsync();
 
-            return View();
+            return View(sliders);
         }
 
         public async Task<IActionResult> Create()
         {
-            var slider? slider = new Slider()
+            var slider = new Slider()
             {
                 CityCountry = "New York, USA",
                 CreatedAt = DateTime.UtcNow,
@@ -29,19 +31,19 @@ namespace Villa_Project.Controllers
                 Title = "Luxury Villa in New York",
 
             };
-            var slider? slider1 = new Slider()
+            var slider1 = new Slider()
             {
                 CityCountry = "Moscow, Russia",
                 CreatedAt = DateTime.UtcNow,
-                Image = "banner-02.jpg",
+                Image = "banner-03.jpg",
                 Title = "Luxury Villa in Moscow ",
 
             };
-            var slider? slider2 = new Slider()
+            var slider2 = new Slider()
             {
                 CityCountry = "Yevlax, Azerbaijan",
                 CreatedAt = DateTime.UtcNow,
-                Image = "banner-02.jpg",
+                Image = "banner-01.jpg",
                 Title = "Luxury Villa in Yevlax",
 
             };

@@ -1,0 +1,47 @@
+﻿@model Villa
+
+
+<div class="container">
+    <form method="post">
+        <label asp-for="Image"></label><br>
+        <input type="text" asp-for="Image"><br><br>
+
+        <label asp-for="Price"></label><br>
+        <input type="text" asp-for="Price"><br><br>
+
+        <label asp-for="Adress"></label><br>
+        <input type="text" asp-for="Adress"><br><br>
+
+        <label asp-for="Description"></label><br>
+        <input type="text" asp-for="Description"><br><br>
+
+        <label asp-for="BedroomCount"></label><br>
+        <input type="number" asp-for="BedroomCount"><br><br>
+
+        <label asp-for="Area"></label><br>
+        <input type="number" asp-for="Area"><br><br>
+
+        <label asp-for="ParkingCount"></label><br>
+        <input type="text" asp-for="ParkingCount"><br><br>
+
+        <label asp-for="BathroomCount"></label><br>
+        <input type="text" asp-for="BathroomCount"><br><br>
+
+        <label asp-for="FloorCount"></label><br>
+        <input type="text" asp-for="FloorCount"><br><br>
+
+        <label asp-for="IsParkingAvailable"></label><br>
+        <input type="checkbox" asp-for="IsParkingAvailable"><br><br>
+
+        <select class="form-select" aria-label="Default select example" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "CategoryName"))">
+            <option selected>Open this select menu</option>
+
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+
+

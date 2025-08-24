@@ -1,0 +1,12 @@
+﻿@model Category
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <form method="post">
+        <label asp-for="CategoryName">Category Name:</label><br>
+        <input type="text" asp-for="CategoryName"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>

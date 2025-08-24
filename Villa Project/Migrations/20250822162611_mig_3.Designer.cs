@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Villa_Project.Context;
 
@@ -11,9 +12,11 @@ using Villa_Project.Context;
 namespace Villa_Project.Migrations
 {
     [DbContext(typeof(VillaDbContext))]
-    partial class VillaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250822162611_mig_3")]
+    partial class mig_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,6 @@ namespace Villa_Project.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<short>("FloorCount")
                         .HasColumnType("smallint");
 
@@ -124,9 +123,6 @@ namespace Villa_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsParkingAvailable")
                         .HasColumnType("bit");
 
                     b.Property<short>("ParkingCount")
