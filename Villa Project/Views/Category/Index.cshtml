@@ -36,8 +36,21 @@
         </tbody>
 
     </table>
+    <div class="container">
+        <nav aria-label="Page navigation example" sytle ="display:flex ; justify-content: center;" >
+        <ul class="pagination">
+            @for(int i = 1; i<= ViewBag.TotalPages; i++)
+            {
+                 <li class="page-item @(ViewBag.CurrentPage <=1 ? "disabled" : "")"><a class="page-link" asp-action="Index" asp-route-page = "@( ViewBag.TotalPages - 1)"  style="color: orangered=">Previous</a></li>
+            <li class="page-item"><a class="page-link"asp-action="Index" asp-route-page="@i">@i</a></li>
+           
+            <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")"><a class="page-link" asp-action="Index" asp-route-page = "@( ViewBag.TotalPages +1)" style="color: orangered=">Next</a></li>
+            }
+        </ul>
+    </nav>
 
     <button>
         <a asp-controller="category" asp-action="create" class="btn btn-success" style="float:right">Categroy Create</a>
     </button>
+    </div>
 </div>

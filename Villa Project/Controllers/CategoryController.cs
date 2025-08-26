@@ -12,9 +12,20 @@ namespace Villa_Project.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
         {
-            var categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
+            var query = _context.Categories.Where(c => !c.IsDeleted).AsQueryable();
+            int totalItems = await query.CountAsync();
+
+            var categories = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
             return View(categories);
         }
 

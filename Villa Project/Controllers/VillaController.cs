@@ -72,6 +72,22 @@ namespace Villa_Project.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var villa = await _context.Villas.FirstOrDefaultAsync(v => v.Id == id && !v.IsDeleted);
+            if (villa == null)
+            {
+                return NotFound();
+            }
+            villa.IsDeleted = true;
+
+            _context.Villas.Update(villa);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 
 }
