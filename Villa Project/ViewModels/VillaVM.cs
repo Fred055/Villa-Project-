@@ -2,10 +2,10 @@
 {
     public class VillaVM
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string? Image { get; set; }
         public string? CategoryName { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public string? Address { get; set; }
         public decimal Area { get; set; }
         public int BedroomCount { get; set; }

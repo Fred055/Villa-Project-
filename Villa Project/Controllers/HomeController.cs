@@ -17,7 +17,7 @@ namespace Villa_Project.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Slider> sliders = await _context.Sliders.Where(s => !s.IsDeleted).ToListAsync();
+            List<Slider> sliders = await _context.Sliders.Where(s => !s.IsDeleted).ToListAsync();
 
             var villas = await _context.Villas.Include(v => v.Category).Where(v => !v.IsDeleted).ToListAsync();
 
@@ -26,9 +26,9 @@ namespace Villa_Project.Controllers
             {
                 Id = v.Id,
                 Image = v.Image,
-                CategoryName = v.CategoryName,
+                CategoryName = v.Category.CategoryName,
                 Price = v.Price,
-                Address = v.Address,
+                Address = v.Adress,
                 Area = v.Area,
                 BedroomCount = v.BedroomCount,
                 BathroomCount = v.BathroomCount,
@@ -40,7 +40,7 @@ namespace Villa_Project.Controllers
             {
                 Id = v.Id,
                 Image = v.Image,
-                CategoryName = v.CategoryName,
+                CategoryName = v.Category.CategoryName,
                 Description = v.Description,
                 BedroomCount = v.BedroomCount,
                 BathroomCount = v.BathroomCount,
@@ -53,7 +53,7 @@ namespace Villa_Project.Controllers
             {
                 Sliders = sliders,
                 Villas = villaVM,
-                VillaSingles = villaSingleVm
+                VillaSingle = villaSingleVm
             };
 
 
