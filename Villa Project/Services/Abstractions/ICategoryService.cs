@@ -6,7 +6,7 @@ namespace Villa_Project.Services.Abstractions
     {
         public Task<List<Category>> GetAllAsync(int page = 1, int pageSize = 5);
         public Task<string> Create(Category category);
-        public Task<Category> EditAsync(int Id);
+        public Task<Category> EditAsync(int Id, Category category);
         public Task<string> DeleteAsync(int Id);
 
     }

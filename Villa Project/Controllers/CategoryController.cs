@@ -58,27 +58,20 @@ namespace Villa_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Category category)
         {
-            var updatedcategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
-            if (updatedcategory == null)
+
+           var result =  await _categoryService.EditAsync(id, category);
+
+            return RedirectToAction(nameof(Index));
+
+            if(result == null)
             {
                 return NotFound();
-            }
-            updatedcategory.CategoryName = category.CategoryName;
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            }   
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var hemenCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-            if (hemenCategory == null)
-            {
-                return NotFound();
-            }
-
-            hemenCategory.IsDeleted = true;
-
-            await _context.SaveChangesAsync();
+          await _categoryService.DeleteAsync(id);
 
             return RedirectToAction(nameof(Index));
 

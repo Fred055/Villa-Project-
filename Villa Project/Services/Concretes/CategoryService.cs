@@ -33,15 +33,32 @@ namespace Villa_Project.Services.Concretes
 
         public Task<string> DeleteAsync(int Id)
         {
-            throw new NotImplementedException();
+            var hemenCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+            if (hemenCategory == null)
+            {
+                return "NotFound";
+            }
+
+            hemenCategory.IsDeleted = true;
+
+            await _context.SaveChangesAsync();
+            return $"{ nameof(hemenCategory)} deleted"
         }
 
-        public Task<Category> EditAsync(int Id)
+        public async Task<Category> EditAsync(int Id, Category category)
         {
-            throw new NotImplementedException();
+            var updatedcategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == Id && !c.IsDeleted);
+
+            if (string.IsNullOrWhiteSpace(updatedCategory.CategroyName))
+            { 
+                    updatedCategory.CategoryName = category.CategoryName;
+            }
+
+            await _context.SaveChangesAsync();
+            return updatedCategory;
         }
 
-        public async Task<List<Category>> GetAllAsync(int page = 1, int pageSize = 5)
+        public async async Task<List<Category>> GetAllAsync(int page = 1, int pageSize = 5)
         {
             var query = _context.Categories.Where(c => !c.IsDeleted).AsQueryable();
             int totalItems = await query.CountAsync();
