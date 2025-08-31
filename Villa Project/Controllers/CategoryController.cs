@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Villa_Project.Context;
 using Villa_Project.Models;
+using Villa_Project.Services.Concretes;
 
 namespace Villa_Project.Controllers
 {
@@ -11,16 +12,14 @@ namespace Villa_Project.Controllers
         public CategoryController(VillaDbContext context)
         {
             _context = context;
+
         }
         public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
         {
-            var query = _context.Categories.Where(c => !c.IsDeleted).AsQueryable();
-            int totalItems = await query.CountAsync();
+            CategoryService service = new CategoryService(_context);
+            var categories = await service.GetAllAsync(page, pageSize);
 
-            var categories = await query
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            var totalItems = await _context.Categories.Where(c => c.IsDeleted).CountAsync();
 
             int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
@@ -37,15 +36,9 @@ namespace Villa_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
-            Category? existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == category.CategoryName);
-            if (existingCategory != null)
-            {
+            CategoryService service = new CategoryService(_context);
 
-                return NotFound();
-            }
-            category.CreatedAt = DateTime.Now;
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
+            await service.Create(category);
             return RedirectToAction(actionName: "Index", controllerName: "Category");
 
 
