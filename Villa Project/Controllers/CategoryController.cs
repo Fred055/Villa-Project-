@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Villa_Project.Context;
 using Villa_Project.Models;
+using Villa_Project.Services.Abstractions;
 using Villa_Project.Services.Concretes;
 
 namespace Villa_Project.Controllers
@@ -9,15 +10,15 @@ namespace Villa_Project.Controllers
     public class CategoryController : Controller
     {
         private readonly VillaDbContext _context;
-        public CategoryController(VillaDbContext context)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(VillaDbContext context, ICategoryService categoryService)
         {
             _context = context;
-
+            _categoryService = categoryService;
         }
         public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
         {
-            CategoryService service = new CategoryService(_context);
-            var categories = await service.GetAllAsync(page, pageSize);
+            var categories = await _categoryService.GetAllAsync(page, pageSize);
 
             var totalItems = await _context.Categories.Where(c => c.IsDeleted).CountAsync();
 
@@ -36,9 +37,8 @@ namespace Villa_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
-            CategoryService service = new CategoryService(_context);
 
-            await service.Create(category);
+            await _categoryService.Create(category);
             return RedirectToAction(actionName: "Index", controllerName: "Category");
 
 

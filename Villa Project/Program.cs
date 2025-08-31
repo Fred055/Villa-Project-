@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Villa_Project.Context;
+using Villa_Project.Services.Abstractions;
+using Villa_Project.Services.Concretes;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Services
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
