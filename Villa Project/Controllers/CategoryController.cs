@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Villa_Project.Context;
 using Villa_Project.Models;
 using Villa_Project.Services.Abstractions;
-using Villa_Project.Services.Concretes;
 
 namespace Villa_Project.Controllers
 {
@@ -18,12 +17,12 @@ namespace Villa_Project.Controllers
         }
         public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
         {
+
             var categories = await _categoryService.GetAllAsync(page, pageSize);
 
-            var totalItems = await _context.Categories.Where(c => c.IsDeleted).CountAsync();
+            var totalItems = await _context.Categories.Where(c => !c.IsDeleted).CountAsync();
 
-            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-
+            var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
             return View(categories);
@@ -59,19 +58,19 @@ namespace Villa_Project.Controllers
         public async Task<IActionResult> Edit(int id, Category category)
         {
 
-           var result =  await _categoryService.EditAsync(id, category);
+            var result = await _categoryService.EditAsync(id, category);
 
-            return RedirectToAction(nameof(Index));
 
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
-            }   
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-          await _categoryService.DeleteAsync(id);
+            await _categoryService.DeleteAsync(id);
 
             return RedirectToAction(nameof(Index));
 

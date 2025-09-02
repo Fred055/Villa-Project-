@@ -31,9 +31,9 @@ namespace Villa_Project.Services.Concretes
 
 
 
-        public Task<string> DeleteAsync(int Id)
+        public async Task<string> DeleteAsync(int Id)
         {
-            var hemenCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+            var hemenCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == Id && !c.IsDeleted);
             if (hemenCategory == null)
             {
                 return "NotFound";
@@ -42,23 +42,23 @@ namespace Villa_Project.Services.Concretes
             hemenCategory.IsDeleted = true;
 
             await _context.SaveChangesAsync();
-            return $"{ nameof(hemenCategory)} deleted"
+            return $"{nameof(hemenCategory)} deleted";
         }
 
         public async Task<Category> EditAsync(int Id, Category category)
         {
-            var updatedcategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == Id && !c.IsDeleted);
+            var updatedCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == Id && !c.IsDeleted);
 
-            if (string.IsNullOrWhiteSpace(updatedCategory.CategroyName))
-            { 
-                    updatedCategory.CategoryName = category.CategoryName;
+            if (!string.IsNullOrWhiteSpace(updatedCategory.CategoryName))
+            {
+                updatedCategory.CategoryName = category.CategoryName;
             }
 
             await _context.SaveChangesAsync();
             return updatedCategory;
         }
 
-        public async async Task<List<Category>> GetAllAsync(int page = 1, int pageSize = 5)
+        public async Task<List<Category>> GetAllAsync(int page = 1, int pageSize = 5)
         {
             var query = _context.Categories.Where(c => !c.IsDeleted).AsQueryable();
             int totalItems = await query.CountAsync();
